@@ -1,0 +1,124 @@
+<div class="row">
+  <thd-breadcrumb [autoGenerate]="false" [items]="breadcrumbs"></thd-breadcrumb>
+  <nz-page-header class="col-12"
+                  nzTitle="{{'settingModule.movie' | translate}}">
+  </nz-page-header>
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-10">
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+          <input type="text" [(ngModel)]="searchObject.keyword" (keydown.enter)="submitSearch()"
+                 nz-input placeholder="{{'common.inputSearch'|translate}}" />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+          <button (click)="submitSearch()" nz-button nzType="primary" nzSearch><span nz-icon nzType="search"></span></button>
+        </ng-template>
+      </div>
+      <div class="col-md-2">
+        <button (click)="onCreateOrUpdate(null)" nz-button nzType="primary"><span nz-icon nzType="plus"></span>{{'common.add'|translate}}</button>
+      </div>
+    </div>
+  </div>
+  <nz-table [(nzPageIndex)]="searchObject.pageIndex" [(nzPageSize)]="searchObject.pageSize"
+            nzFrontPagination="false"
+            [nzTotal]="totalElement" (nzQueryParams)="pageChange($event)"
+            nzBordered="true" class="col-12 mt-2" nzSize="small" #table
+            nzShowPagination nzShowSizeChanger [nzData]="pageElements">
+    <thead>
+    <tr>
+      <th>{{'common.code' |translate}}</th>
+      <th>{{'common.name' |translate}}</th>
+      <th>{{'common.description' |translate}}</th>
+      <th style="width: 100px">{{'common.status' |translate}}</th>
+      <th style="width: 200px">{{'common.action' |translate}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of table.data">
+      <td>{{ data.code }}</td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.description }}</td>
+      <td class="text-center">
+        <span *ngIf="!data.voided" class="badge text-bg-success">{{'common.voidedFalse' | translate}}</span>
+        <span *ngIf="data.voided" class="badge text-bg-danger">{{'common.voidedTrue' | translate}}</span>
+      </td>
+      <td class="text-center" style="width: 200px">
+        <nz-button-group>
+          <button (click)="onCreateOrUpdate(data)" nz-button nzType="primary">
+            <span nz-icon nzType="edit"></span>{{'common.edit'|translate}}
+          </button>
+          <button nzOkDanger nzIcon="delete" (nzOnConfirm)="delete(data.id)" nz-popconfirm
+                  nzPopconfirmTitle="{{'common.confirmDelete' |translate}}" nz-button nzType="primary" nzDanger>
+            <span nz-icon nzType="delete"></span>{{'common.delete'|translate}}
+          </button>
+        </nz-button-group>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>
+<nz-modal nzWidth="80%" nzMaskClosable="false" [(nzVisible)]="isVisible" [nzOkDisabled]="formGroup?.invalid" (nzOnOk)="onSubmit()" (nzOnCancel)="isVisible=false" nzTitle="{{ (entity?.id?'common.update':'common.create')|translate}}" >
+  <ng-container *nzModalContent >
+    <div class="row" nz-form nzLayout="vertical" [formGroup]="formGroup">
+      <thd-input class="col-md-4" label="{{'common.code'|translate}}" [hasFeedback]="true"
+                 formControlName="code" [errorText]="getErrorMessage('code')">
+      </thd-input>
+      <thd-input class="col-md-4" label="{{'common.name'|translate}}" [hasFeedback]="true"  formControlName="name"
+                 [errorText]="getErrorMessage('name')">
+      </thd-input>
+      <thd-input type="select" [items]="years" class="col-md-4" label="{{'movie.publishYear'|translate}}" [hasFeedback]="true"  formControlName="publishYear"
+                 [errorText]="getErrorMessage('publishYear')">
+      </thd-input>
+      <thd-input class="col-md-4" label="{{'movie.otherName'|translate}}" [hasFeedback]="true"  formControlName="otherName"
+                 [errorText]="getErrorMessage('otherName')">
+      </thd-input>
+      <thd-input class="col-md-4" label="{{'settingModule.country'|translate}}" [hasFeedback]="true"  formControlName="country"
+                 bindLabel="name" [items]="countries" type="select" [errorText]="getErrorMessage('country')">
+      </thd-input>
+      <thd-input class="col-md-4" label="{{'common.status'|translate}}" [hasFeedback]="true"  formControlName="voided"
+                 bindValue="value" [isTranslation]="true" bindLabel="label"
+                 [items]="voidedList" type="select" [errorText]="getErrorMessage('voided')">
+      </thd-input>
+      <thd-input selectMode="multiple" class="col-md-12" label="{{'settingModule.category'|translate}}" [hasFeedback]="true"
+                 formControlName="categories"
+                  bindLabel="name" allowClear="true" [errorText]="getErrorMessage('categories')"
+                 [items]="categories" type="select">
+      </thd-input>
+      <thd-input class="col-md-10" label="{{'common.description'|translate}}" [hasFeedback]="true"  formControlName="description"
+                 [errorText]="getErrorMessage('description')" type="editor">
+      </thd-input>
+      <nz-form-item class="col-md-2">
+        <nz-form-label nzRequired>{{'movie.image' |translate}}</nz-form-label>
+        <nz-upload
+          class="avatar-uploader"
+          [nzAction]="serverUrl+'/api/v1/files'"
+          nzName="file"
+          nzListType="picture-card"
+          [nzFileList]="fileList"
+          [nzPreview]="handlePreview"
+          [nzDownload]="handleDownload"
+          [nzShowButton]="!formGroup.get('file')?.value"
+          (nzChange)="handleChangeFileUpload($event)"
+        >
+          <ng-container *ngIf="!formGroup.get('file')?.value?.id">
+            <span class="upload-icon" nz-icon [nzType]="uploading ? 'loading' : 'plus'"></span>
+            <div class="ant-upload-text">Upload</div>
+          </ng-container>
+          <img *ngIf="formGroup.get('file')?.value?.id"
+               [src]="serverUrl+'/api/v1/publish/files/'+formGroup.get('file')?.value?.id" style="width: 100%" />
+        </nz-upload>
+      </nz-form-item>
+    </div>
+  </ng-container>
+</nz-modal>
+<nz-modal
+  [nzVisible]="previewVisible"
+  [nzContent]="modalContent"
+  [nzFooter]="null"
+  (nzOnCancel)="previewVisible = false">
+  <ng-template #modalContent>
+    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+  </ng-template>
+</nz-modal>
+
+
