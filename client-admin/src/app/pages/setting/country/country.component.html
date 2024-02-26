@@ -1,5 +1,4 @@
 <div class="row">
-  <thd-breadcrumb [autoGenerate]="false" [items]="breadcrumbs"></thd-breadcrumb>
   <nz-page-header class="col-12"
                   nzTitle="{{'settingModule.country' | translate}}">
   </nz-page-header>
@@ -30,7 +29,7 @@
       <th>{{'common.name' |translate}}</th>
       <th>{{'common.description' |translate}}</th>
       <th style="width: 100px">{{'common.status' |translate}}</th>
-      <th style="width: 200px">{{'common.action' |translate}}</th>
+      <th style="width: 100px">{{'common.action' |translate}}</th>
     </tr>
     </thead>
     <tbody>
@@ -42,14 +41,15 @@
         <span *ngIf="!data.voided" class="badge text-bg-success">{{'common.voidedFalse' | translate}}</span>
         <span *ngIf="data.voided" class="badge text-bg-danger">{{'common.voidedTrue' | translate}}</span>
       </td>
-      <td class="text-center" style="width: 200px">
+      <td class="text-center" style="width: 100px">
         <nz-button-group>
-          <button (click)="onCreateOrUpdate(data)" nz-button nzType="primary">
-            <span nz-icon nzType="edit"></span>{{'common.edit'|translate}}
+          <button (click)="onCreateOrUpdate(data)"
+                  nz-tooltip="{{'common.edit'|translate}}" nz-button nzType="link">
+            <span  (click)="onCreateOrUpdate(data)" nz-icon nzType="edit"></span>
           </button>
-          <button nzOkDanger nzIcon="delete" (nzOnConfirm)="delete(data.id)" nz-popconfirm
-                  nzPopconfirmTitle="{{'common.confirmDelete' |translate}}" nz-button nzType="primary" nzDanger>
-            <span nz-icon nzType="delete"></span>{{'common.delete'|translate}}
+          <button nzOkDanger nzIcon="delete" nz-tooltip="{{'common.delete'|translate}}" (nzOnConfirm)="delete(data.id)" nz-popconfirm
+                  nzPopconfirmTitle="{{'common.confirmDelete' |translate}}" nz-button nzType="link" nzDanger>
+            <span nz-icon nzType="delete"></span>
           </button>
         </nz-button-group>
       </td>

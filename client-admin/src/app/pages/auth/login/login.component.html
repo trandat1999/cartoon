@@ -4,7 +4,7 @@
       <h4>Welcome!</h4>
     </div>
     <div nz-form nz-row
-         nzLayout="vertical" [formGroup]="formGroup" class="card-body">
+         nzLayout="vertical" (submit)="submitForm()" [formGroup]="formGroup" class="card-body">
       <nz-form-item nz-col nzSpan="24">
         <nz-form-label nzFor="username" nzRequired>Username</nz-form-label>
         <nz-form-control nzErrorTip="Please input your username!">
@@ -29,7 +29,7 @@
             </label>
           </div>
           <div nz-col [nzSpan]="12">
-            <a routerLink="/forgot-password" class="login-form-forgot">{{'authModule.forgotPassword' | translate}}</a>
+            <a routerLink="/forgot-password" class="login-form-forgot">{{'auth.forgotPassword' | translate}}</a>
           </div>
         </div>
       </div>

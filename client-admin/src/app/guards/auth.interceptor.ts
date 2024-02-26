@@ -35,12 +35,14 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     if (!request.url.includes('/api/v1/auth') && !request.url.includes('/api/v1/publish')) {
       const token = this.storageService.getToken();
-      if (!token || token.length <= 0) {
-        this.router.navigate(['/login']);
+      // if (!token || token.length <= 0) {
+      //   this.router.navigate(['/login']);
+      // }
+      if(token && token.length>0){
+        request = request.clone({
+          setHeaders: {"Authorization": "Bearer "+ this.storageService.getToken()}
+        })
       }
-      request = request.clone({
-        setHeaders: {"Authorization": "Bearer "+ this.storageService.getToken()}
-      })
       return next.handle(request).pipe(catchError(error => {
         if (error instanceof HttpErrorResponse && error.status === 401) {
           return this.handle401Error(request, next);
@@ -52,7 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    if (!this.isRefreshing) {
+    // if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
       const token = this.storageService.getRefreshToken();
@@ -78,7 +80,7 @@ export class AuthInterceptor implements HttpInterceptor {
             return next.handle(request);
           })
         )
-      }
+      // }
     }
     // if (this.storageService.getRefreshToken()) {
     //   this.http.get(this.applicationConfigService.apiBaseUrl + "/api/v1/auth/refresh-token/" +

@@ -31,7 +31,7 @@ public class Movie extends BaseEntity{
     private String otherName;
     @Column(name = "code")
     private String code;
-    @Column(name = "description")
+    @Column(name = "description",columnDefinition = "text")
     private String description;
     @Column(name = "publish_year")
     private Integer publishYear;

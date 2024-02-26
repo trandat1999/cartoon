@@ -3,7 +3,6 @@ import {AuthService} from "../auth/auth.service";
 import {Router} from "@angular/router";
 import {StorageService} from "../../services/storage.service";
 import {TranslateService} from "@ngx-translate/core";
-import {en_US, NzI18nService, vi_VN} from "ng-zorro-antd/i18n";
 import {TranslateConfigService} from "../../services/translate.service";
 
 @Component({
@@ -16,8 +15,8 @@ export class LayoutComponent implements OnInit {
   currentLanguage = "en";
   constructor(private authService:AuthService,
               private translateService:TranslateConfigService,
-
               private router:Router,
+              private translate: TranslateService,
               private storage : StorageService) {
     this.currentLanguage = this.translateService.getLanguage();
   }
@@ -34,5 +33,11 @@ export class LayoutComponent implements OnInit {
   changeLanguage(lang: string){
     this.translateService.changeLanguage(lang);
   }
-
+  translateFn = (key:string) => {
+    if(key){
+      return this.translate.instant(""+ key);
+    }else{
+      return "";
+    }
+  }
 }

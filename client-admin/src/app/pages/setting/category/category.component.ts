@@ -91,7 +91,6 @@ export class CategoryComponent implements OnInit {
         this.isVisible=false;
         this.submitSearch();
       }
-
     })
   }
   pageChange(page:any){

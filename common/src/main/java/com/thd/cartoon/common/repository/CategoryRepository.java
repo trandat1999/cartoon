@@ -27,7 +27,8 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query(value = "select new com.thd.cartoon.common.dto.category.CategoryDto(entity) from Category entity " +
             "where (:voided is null or entity.voided =:voided) " +
             "and (:keyword is null or :keyword = '' or entity.code like concat('%',:keyword,'%') " +
-            "or entity.name like concat('%',:keyword,'%') )")
+            "or entity.name like concat('%',:keyword,'%') ) " +
+            "order by entity.lastModifiedDate desc, entity.code ")
     Page<CategoryDto> search(String keyword, Boolean voided, Pageable pageable);
 
 }

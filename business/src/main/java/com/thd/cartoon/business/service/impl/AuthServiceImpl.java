@@ -60,7 +60,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
         var user = userRepository.findByUsername(request.getUsername()).orElseThrow();
         var token = jwtService.generateToken(request.getUsername());
         var refreshToken = UUID.randomUUID().toString();
-        revokeAllTokenAndRefreshToken(user.getUsername());
+        revokeAllTokenAndRefreshToken(user.getUsername(),true);
         saveToken(user.getUsername(), token);
         saveRefreshToken(user.getUsername(), refreshToken);
         AuthResponse authResponse = AuthResponse.builder()
@@ -207,12 +207,12 @@ public class AuthServiceImpl extends BaseService implements AuthService {
             return getResponse400(getMessage(SystemMessage.TOKEN_EXPIRED));
         }
         String jwtToken = jwtService.generateToken(refreshToken.getUsername());
-        String refreshTokenString = UUID.randomUUID().toString();
-        revokeAllTokenAndRefreshToken(refreshToken.getUsername());
+//        String refreshTokenString = UUID.randomUUID().toString();
+        revokeAllTokenAndRefreshToken(refreshToken.getUsername(),false);
         saveToken(refreshToken.getUsername(), jwtToken);
-        saveRefreshToken(refreshToken.getUsername(), refreshTokenString);
+//        saveRefreshToken(refreshToken.getUsername(), refreshTokenString);
         AuthResponse authResponse = AuthResponse.builder()
-                .refreshToken(refreshTokenString)
+                .refreshToken(token)
                 .accessToken(jwtToken).build();
         return getResponse200(authResponse, getMessage(SystemMessage.SUCCESS));
     }
@@ -238,7 +238,7 @@ public class AuthServiceImpl extends BaseService implements AuthService {
         refreshTokenRepository.save(token);
     }
 
-    private void revokeAllTokenAndRefreshToken(String username) {
+    private void revokeAllTokenAndRefreshToken(String username, boolean revokeRefreshToken) {
         List<Token> tokens = tokenRepository.findAllByUsername(username);
         if (!CollectionUtils.isEmpty(tokens)) {
             tokens.forEach(token -> {
@@ -247,12 +247,14 @@ public class AuthServiceImpl extends BaseService implements AuthService {
             });
             tokenRepository.saveAll(tokens);
         }
-        List<RefreshToken> refreshTokens = refreshTokenRepository.findAllByUsername(username);
-        if (!CollectionUtils.isEmpty(refreshTokens)) {
-            refreshTokens.forEach(token -> {
-                token.setRevoked(true);
-            });
-            refreshTokenRepository.saveAll(refreshTokens);
+        if(revokeRefreshToken){
+            List<RefreshToken> refreshTokens = refreshTokenRepository.findAllByUsername(username);
+            if (!CollectionUtils.isEmpty(refreshTokens)) {
+                refreshTokens.forEach(token -> {
+                    token.setRevoked(true);
+                });
+                refreshTokenRepository.saveAll(refreshTokens);
+            }
         }
     }
 }

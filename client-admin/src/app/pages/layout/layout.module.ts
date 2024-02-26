@@ -11,6 +11,8 @@ import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {FormsModule} from "@angular/forms";
+import {CommonsModule} from "../commons/commons.module";
+import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 
 
 
@@ -18,20 +20,22 @@ import {FormsModule} from "@angular/forms";
   declarations: [
     LayoutComponent
   ],
-  imports: [
-    CommonModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzIconModule,
-    RouterOutlet,
-    RouterLinkWithHref,
-    TranslateModule,
-    RouterLinkActive,
-    NzDropDownModule,
-    NzAvatarModule,
-    NzButtonModule,
-    NzSelectModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzIconModule,
+        RouterOutlet,
+        RouterLinkWithHref,
+        TranslateModule,
+        RouterLinkActive,
+        NzDropDownModule,
+        NzAvatarModule,
+        NzButtonModule,
+        NzSelectModule,
+        FormsModule,
+        CommonsModule,
+        NzBreadCrumbModule
+    ]
 })
 export class LayoutModule { }

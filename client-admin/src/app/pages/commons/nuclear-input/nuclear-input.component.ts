@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   HostBinding,
@@ -6,10 +7,17 @@ import {
   OnChanges,
   OnDestroy,
   OnInit, Optional, Self,
-  SimpleChanges,
+  SimpleChanges, TemplateRef,
   ViewChild
 } from '@angular/core';
-import {ControlValueAccessor, NgControl, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  NgControl, ValidationErrors,
+  Validator,
+  Validators
+} from "@angular/forms";
 import {FocusMonitor} from "@angular/cdk/a11y";
 import {TranslateService} from "@ngx-translate/core";
 import {BooleanInput} from "ng-zorro-antd/core/types";
@@ -17,12 +25,12 @@ import {BooleanInput} from "ng-zorro-antd/core/types";
 @Component({
   selector: 'thd-input',
   templateUrl: './nuclear-input.component.html',
-  styleUrls: ['./nuclear-input.component.scss']
+  styleUrls: ['./nuclear-input.component.scss'],
 })
-export class NuclearInputComponent implements OnInit, ControlValueAccessor, OnChanges {
+export class NuclearInputComponent implements OnInit, ControlValueAccessor, OnChanges{
   static nextId = 0;
   @HostBinding()
-  id: string = `e-learning-input-${NuclearInputComponent.nextId++}`;
+  id: string = `nuclear-input-${NuclearInputComponent.nextId++}`;
   inputElement: NgControl;
   ngControl: NgControl;
   @ViewChild('inputElements1') set content1(content: NgControl) {
@@ -40,6 +48,20 @@ export class NuclearInputComponent implements OnInit, ControlValueAccessor, OnCh
     }
   }
   @ViewChild('inputElements3') set content3(content: NgControl) {
+    if (content) {
+      this.inputElement = content;
+      const validators = this.ngControl?.control?.validator;
+      this.inputElement?.control?.setValidators(validators ? validators : null);
+    }
+  }
+  @ViewChild('inputElements4') set content4(content: NgControl) {
+    if (content) {
+      this.inputElement = content;
+      const validators = this.ngControl?.control?.validator;
+      this.inputElement?.control?.setValidators(validators ? validators : null);
+    }
+  }
+  @ViewChild('inputElements5') set content5(content: NgControl) {
     if (content) {
       this.inputElement = content;
       const validators = this.ngControl?.control?.validator;
@@ -66,6 +88,22 @@ export class NuclearInputComponent implements OnInit, ControlValueAccessor, OnCh
   @Input() allowClear: BooleanInput = false;
   @Input() selectMode: "default" | "multiple" | "tags" = "default";
   @Input('value') val: any;
+  @Input() step: number = 1;
+  @Input() min: number = -Infinity;
+  @Input() max: number = Infinity;
+  @Input() showTime: boolean = false;
+  @Input() showNow: boolean = true;
+  @Input() showToday: boolean = true;
+  @Input() dateTimeFormat: string;
+  @Input() showLabel: boolean = true;
+  @Input() prefixIcon: string;
+  @Input() suffixIcon: string;
+  @Input() prefix: string| TemplateRef<void>;
+  @Input() suffix: string| TemplateRef<void>;
+  @Input() addOnBefore: string| TemplateRef<void>;
+  @Input() addOnAfter: string| TemplateRef<void>;
+  @Input() addOnBeforeIcon: string;
+  @Input() addOnAfterIcon: string;
 
   get value(): any {
     return this.val;
@@ -74,12 +112,12 @@ export class NuclearInputComponent implements OnInit, ControlValueAccessor, OnCh
     this.val = val;
     this.onChange(val);
     this.onTouched();
+    const errors = this.ngControl?.control?.errors;
+    this.inputElement?.control?.setErrors(errors ? errors : null);
   }
-
   onChange: any = () => {};
   onTouched: any = () => {};
-
-  constructor(public translate: TranslateService, private fm: FocusMonitor, private elRef: ElementRef<HTMLElement>, @Self() @Optional() public control: NgControl) {
+  constructor(public translate: TranslateService, @Self() @Optional() public control: NgControl) {
     if (this.control) {
       this.ngControl = this.control
       this.control.valueAccessor = this;
@@ -102,23 +140,25 @@ export class NuclearInputComponent implements OnInit, ControlValueAccessor, OnCh
       this.value = value;
     }
   }
-
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
-
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
-
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
-
   ngOnInit(): void {
-    const validators = this.ngControl?.control?.validator;
-    this.inputElement?.control.setValidators(validators ? validators : null);
-    this.inputElement?.control.updateValueAndValidity();
+    if (this.control) {
+      this.control.control?.statusChanges.subscribe((status) => {
+        this.inputElement?.control.markAsDirty();
+      });
+    }
+    // const validators = this.control?.control?.validator;
+    // this.control?.control.setValidators(validators ? validators : null);
+    // const errors = this.control?.control?.errors;
+    // this.control?.control?.setErrors(errors ? errors : null);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -133,9 +173,6 @@ export class NuclearInputComponent implements OnInit, ControlValueAccessor, OnCh
 
   compareFn = (o1: any, o2: any): boolean => {
     if (o1 && o2){
-      // if(this.bindValue){
-      //   return o1===o2 || o1=== o2[this.bindValue]
-      // }
       if(o1.value && o2.value){
         return o1.value === o2.value
       }
@@ -149,5 +186,4 @@ export class NuclearInputComponent implements OnInit, ControlValueAccessor, OnCh
     }
     return o1 === o2;
   }
-
 }

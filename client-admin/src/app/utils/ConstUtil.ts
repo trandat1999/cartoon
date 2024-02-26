@@ -1,3 +1,6 @@
+import {FormGroup} from "@angular/forms";
+import {TranslateService} from "@ngx-translate/core";
+
 export const ACCESS_TOKEN = "access_token";
 export const REFRESH_TOKEN = "refresh_token";
 export const LANGUAGE = "language";
@@ -14,3 +17,18 @@ export const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
   });
+export const getErrorMessage = (control:string,formGroup: FormGroup,translate: TranslateService)=>{
+  if (formGroup && control) {
+    if (formGroup.get(control).errors?.['serverError'] ||
+      formGroup.get(control).errors?.['serverErrorMess']) {
+      return formGroup.get(control).errors?.['serverErrorMess'];
+    }
+    if (formGroup.get(control).errors?.['required']) {
+      return translate.instant("validation.required");
+    }
+    if (formGroup.get(control).errors?.['email']) {
+      return translate.instant("validation.email");
+    }
+  }
+  return "";
+}

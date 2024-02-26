@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BreadcrumbItem} from "../../commons/breadcrumb/breadcrumb.component";
 import {Category, Country, Movie} from "../setting.model";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {getBase64, VOIDED_CHOICE} from "../../../utils/ConstUtil";
+import {VOIDED_CHOICE} from "../../../utils/ConstUtil";
 import {MovieSearch} from "../../../utils/search-object";
 import {TranslateService} from "@ngx-translate/core";
 import {MovieService} from "./movie.service";
@@ -106,39 +106,12 @@ export class MovieComponent implements OnInit {
 
   getErrorMessage(control: string): string {
     if (this.formGroup && control) {
-      if (control == "code" && this.formGroup.controls[control].errors) {
-        if (this.formGroup.controls[control].errors?.['required']) {
-          return this.translate.instant("common.fieldRequired");
-        }
-        if (this.formGroup.controls[control].errors?.['serverError'] ||
-          this.formGroup.controls[control].errors?.['serverErrorMess']) {
-          return this.formGroup.controls[control].errors?.['serverErrorMess'];
-        }
+      if (this.formGroup.get(control).errors?.['serverError'] ||
+        this.formGroup.get(control).errors?.['serverErrorMess']) {
+        return this.formGroup.get(control).errors?.['serverErrorMess'];
       }
-      if (control == "name" && this.formGroup.controls[control].errors) {
-        if (this.formGroup.controls[control].errors?.['required']) {
-          return this.translate.instant("common.fieldRequired");
-        }
-      }
-      if (control == "publishYear" && this.formGroup.controls[control].errors) {
-        if (this.formGroup.controls[control].errors?.['required']) {
-          return this.translate.instant("common.fieldRequired");
-        }
-      }
-      if (control == "description" && this.formGroup.controls[control].errors) {
-        if (this.formGroup.controls[control].errors?.['required']) {
-          return this.translate.instant("common.fieldRequired");
-        }
-      }
-      if (control == "file" && this.formGroup.controls[control].errors) {
-        if (this.formGroup.controls[control].errors?.['required']) {
-          return this.translate.instant("common.fieldRequired");
-        }
-      }
-      if (control == "categories" && this.formGroup.controls[control].errors) {
-        if (this.formGroup.controls[control].errors?.['required']) {
-          return this.translate.instant("common.fieldRequired");
-        }
+      if (this.formGroup.get(control).errors?.['required']) {
+        return this.translate.instant("common.fieldRequired");
       }
     }
     return "";

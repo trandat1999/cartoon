@@ -49,7 +49,8 @@
     "add": "Add",
     "voidedFalse": "Active",
     "voidedTrue": "Voided",
-    "status": "Status"
+    "status": "Status",
+    "uploadFile": "Upload File"
   },
   "loginComponent": {
     "username": "username",
@@ -81,14 +82,9 @@
     "manage": "Manage",
     "users": "Users",
     "roles": "Role",
-    "administrativeUnit": "Administrative Unit",
-    "product" : "Product",
-    "import": "Import",
-    "publisher": "Publisher",
-    "warehouse": "Warehouse",
-    "orderImport": "Order Import",
     "country": "Country",
-    "movie": "Movie"
+    "movie": "Movie",
+    "movieEpisode": "Movie Episode"
   },
   "user": {
     "profile": "Profile",
@@ -139,29 +135,52 @@
     "profile": "Profile",
     "setting": "Setting"
   },
-  "authModule": {
+  "auth": {
     "backToLogin": "Back to login",
     "generateToken": "Generate token",
     "backToRegister": "Back to register",
     "confirmUsername": "Confirm username",
     "fillUsernameAndEmail": "Please fill in your username and email to reset a new password",
-    "forgotPassword": "Forgot password"
+    "forgotPassword": "Forgot password",
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "fullName": "Full name",
+    "login": "Login",
+    "ifExistAccount" : "If already account",
+    "confirmPassword": "Confirm password",
+    "register" : "Register"
   },
   "settingModule": {
     "category": "Category",
     "country": "Country",
-    "movie": "Movie"
+    "movie": "Movie",
+    "movieEpisode": "Movie episode"
   },
   "movie":{
     "publishYear": "Publish Year",
     "category": "Category",
     "otherName": "Other name",
-    "image": "Image"
+    "image": "Image",
+    "episode": "Episode",
+    "part": "Part",
+    "link": "Link",
+    "orderNumber": "Number Order",
+    "embeddedLink": "Embedded Link",
+    "file": "File",
+    "previousEpisode": "Episode previous"
   },
   "layout": {
     "english": "English",
     "vietnamese": "Vietnamese",
     "profile": "Profile",
     "logout": "Logout"
+  },
+  "breadcrumb": {
+    "none": "",
+    "category": "Category",
+    "country": "Country",
+    "movieEpisode": "Movie Episode",
+    "movie": "Movie"
   }
 }

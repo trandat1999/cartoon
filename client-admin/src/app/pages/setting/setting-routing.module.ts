@@ -3,21 +3,28 @@ import {RouterModule, Routes} from '@angular/router';
 import {CategoryComponent} from "./category/category.component";
 import {CountryComponent} from "./country/country.component";
 import {MovieComponent} from "./movie/movie.component";
+import {MovieEpisodeComponent} from "./movie-episode/movie-episode.component";
 
 const routes: Routes = [
   {
     path: "category", component: CategoryComponent, data: {
-      breadcrumb: 'category'
+      breadcrumb: 'breadcrumb.category',
+      breadcrumbI18n: 'breadcrumb.category',
     },
   },
   {
     path: "country", component: CountryComponent, data: {
-      breadcrumb: 'country'
+      breadcrumb: 'breadcrumb.country'
     },
   },
   {
     path: "movie", component: MovieComponent, data: {
-      breadcrumb: 'movie'
+      breadcrumb: 'breadcrumb.movie'
+    },
+  },
+  {
+    path: "movie-episode", component: MovieEpisodeComponent, data: {
+      breadcrumb: 'breadcrumb.movieEpisode'
     },
   },
 ];

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
 
 export interface BreadcrumbItem {
   link?: string;
@@ -11,11 +12,14 @@ export interface BreadcrumbItem {
 })
 export class BreadcrumbComponent implements OnInit {
 
-  @Input()
-  items :BreadcrumbItem[] = [];
-  @Input()
-  autoGenerate: boolean = false;
-  constructor() { }
+  @Input() items :BreadcrumbItem[] = [];
+  @Input() autoGenerate: boolean = false;
+  @Input() routeLabel: string = 'breadcrumb';
+  @Input() routeLabelFn: (label: string) => string = label => label;
+
+  constructor(
+    private translateService: TranslateService
+  ) { }
 
   ngOnInit(): void {
   }

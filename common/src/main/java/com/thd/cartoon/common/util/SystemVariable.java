@@ -2,6 +2,7 @@ package com.thd.cartoon.common.util;
 
 public class SystemVariable {
     public static final String USER = "user";
+    public static final String MOVIE_FIELD = "movie";
     public static final String ROLES = "roles";
     public static final String ROLE = "role";
 

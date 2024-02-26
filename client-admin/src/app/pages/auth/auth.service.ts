@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from "../../services/base.service";
-import {AuthRequest} from "./auth.model";
+import {AuthRequest, RegisterRequest} from "./auth.model";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,9 @@ export class AuthService{
   }
   refreshToken(token : string){
     return this.base.get(this.apiUrl+"/refresh-token/"+token);
+  }
+  register(request: RegisterRequest){
+    return this.base.post(this.apiUrl+"/register",request);
   }
 
 }

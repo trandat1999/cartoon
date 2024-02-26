@@ -1,4 +1,5 @@
-<nz-breadcrumb [nzAutoGenerate]="autoGenerate" nzSeparator=">">
+<nz-breadcrumb [nzAutoGenerate]="autoGenerate" [nzRouteLabel]="routeLabel"
+               [nzRouteLabelFn]="routeLabelFn" nzSeparator=">">
   <nz-breadcrumb-item>
     <a routerLink="/"><span nz-icon nzType="home"></span> Home</a>
   </nz-breadcrumb-item>

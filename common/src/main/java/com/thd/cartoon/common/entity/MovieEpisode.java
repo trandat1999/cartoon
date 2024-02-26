@@ -31,6 +31,8 @@ public class MovieEpisode extends BaseEntity{
     private String name;
     @Column(name = "previous_episode")
     private String previousEpisode;
+    @Column(name = "part")
+    private Integer part;
     @OneToMany(orphanRemoval = true,mappedBy = "episode",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @OrderBy("orderNumber asc ")
     private List<MovieLink> links = new ArrayList<>();

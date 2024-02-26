@@ -19,7 +19,8 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu [nzOpen]="countryItem.isActive || categoryItem.isActive || movieItem.isActive" nzTitle="{{'navigation.settings' | translate}}" nzIcon="setting">
+      <li nz-submenu [nzOpen]="countryItem.isActive || categoryItem.isActive || movieItem.isActive
+      || movieEpisodeItem.isActive" nzTitle="{{'navigation.settings' | translate}}" nzIcon="setting">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLinkActive="ant-menu-item-selected" #categoryItem="routerLinkActive"
@@ -32,6 +33,10 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLinkActive="ant-menu-item-selected" #movieItem="routerLinkActive"
                routerLink="/setting/movie">{{'navigation.movie'|translate}}</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLinkActive="ant-menu-item-selected" #movieEpisodeItem="routerLinkActive"
+               routerLink="/setting/movie-episode">{{'navigation.movieEpisode'|translate}}</a>
           </li>
         </ul>
       </li>
@@ -63,7 +68,8 @@
       </div>
     </nz-header>
     <nz-content>
-      <div class="inner-content">
+      <thd-breadcrumb [routeLabelFn]="translateFn"  [autoGenerate]="true"></thd-breadcrumb>
+      <div class="inner-content mt-2">
         <router-outlet></router-outlet>
       </div>
     </nz-content>

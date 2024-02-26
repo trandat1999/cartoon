@@ -20,3 +20,15 @@ export interface File extends BaseObject{
   size?:number;
   path?:string;
 }
+export interface MovieEpisode extends BaseObject{
+  movie?:Movie;
+  episode?:number;
+  previousEpisode?:string;
+  part?:number;
+  links?:MovieLink[];
+}
+export interface MovieLink extends BaseObject{
+  orderNumber?:number;
+  embeddedLink?:string;
+  file?:File;
+}

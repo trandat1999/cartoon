@@ -19,32 +19,36 @@ import {NzPopconfirmModule} from "ng-zorro-antd/popconfirm";
 import { MovieComponent } from './movie/movie.component';
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import {NzSelectModule} from "ng-zorro-antd/select";
+import { MovieEpisodeComponent } from './movie-episode/movie-episode.component';
+import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 
 
 @NgModule({
   declarations: [
     CategoryComponent,
     CountryComponent,
-    MovieComponent
+    MovieComponent,
+    MovieEpisodeComponent
   ],
-  imports: [
-    CommonModule,
-    SettingRoutingModule,
-    NzPageHeaderModule,
-    TranslateModule,
-    NzTableModule,
-    CdkTableModule,
-    NzButtonModule,
-    NzIconModule,
-    NzInputModule,
-    FormsModule,
-    NzModalModule,
-    NzFormModule,
-    ReactiveFormsModule,
-    CommonsModule,
-    NzPopconfirmModule,
-    NzUploadModule,
-    NzSelectModule
-  ]
+    imports: [
+        CommonModule,
+        SettingRoutingModule,
+        NzPageHeaderModule,
+        TranslateModule,
+        NzTableModule,
+        CdkTableModule,
+        NzButtonModule,
+        NzIconModule,
+        NzInputModule,
+        FormsModule,
+        NzModalModule,
+        NzFormModule,
+        ReactiveFormsModule,
+        CommonsModule,
+        NzPopconfirmModule,
+        NzUploadModule,
+        NzSelectModule,
+        NzToolTipModule
+    ]
 })
 export class SettingModule { }

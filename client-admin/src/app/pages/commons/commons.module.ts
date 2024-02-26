@@ -11,6 +11,8 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import {FormsModule} from "@angular/forms";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {AngularEditorModule} from "@kolkov/angular-editor";
+import {NzInputNumberModule} from "ng-zorro-antd/input-number";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 
 
 
@@ -23,17 +25,19 @@ import {AngularEditorModule} from "@kolkov/angular-editor";
     BreadcrumbComponent,
     NuclearInputComponent
   ],
-    imports: [
-        CommonModule,
-        NzBreadCrumbModule,
-        NzIconModule,
-        RouterLinkWithHref,
-        NzFormModule,
-        NzGridModule,
-        NzInputModule,
-        FormsModule,
-        NzSelectModule,
-        AngularEditorModule
-    ]
+  imports: [
+    CommonModule,
+    NzBreadCrumbModule,
+    NzIconModule,
+    RouterLinkWithHref,
+    NzFormModule,
+    NzGridModule,
+    NzInputModule,
+    FormsModule,
+    NzSelectModule,
+    AngularEditorModule,
+    NzInputNumberModule,
+    NzDatePickerModule
+  ]
 })
 export class CommonsModule { }

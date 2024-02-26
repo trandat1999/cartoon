@@ -33,6 +33,7 @@ public class SystemMessage {
 
     // validation
     public static final String VALIDATION_NOTNULL = "{cartoon.validation.NotNull}";
+    public static final String VALIDATION_NOTNULL_SV = "cartoon.validation.NotNull";
     public static final String VALIDATION_NOT_BLANK = "{cartoon.validation.NotBlank}";
     public static final String VALIDATION_EMAIL = "{cartoon.validation.email}";
     public static final String VALIDATION_MIN_LENGTH = "{cartoon.validation.MinLength}";

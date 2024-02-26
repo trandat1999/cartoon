@@ -2,6 +2,7 @@ package com.thd.cartoon.common.dto.movie;
 
 import com.thd.cartoon.common.dto.file.FileDto;
 import com.thd.cartoon.common.entity.MovieLink;
+import com.thd.cartoon.common.util.anotation.ExistValue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@ExistValue(fieldName = {"file","embeddedLink"},message = "{cartoon.validation.NotNull}")
 public class MovieLinkDto {
     private Long id;
     @NotNull(message = "{cartoon.validation.NotNull}")
@@ -23,6 +25,7 @@ public class MovieLinkDto {
     private String embeddedLink;
     private FileDto file;
     private MovieEpisodeDto episode;
+    private Boolean voided;
 
     public MovieLinkDto(MovieLink entity) {
         if (entity != null) {
@@ -31,7 +34,7 @@ public class MovieLinkDto {
             this.orderNumber = entity.getOrderNumber();
             this.embeddedLink = entity.getEmbeddedLink();
             this.file = new FileDto(entity.getFile());
-            this.episode = new MovieEpisodeDto(entity.getEpisode());
+            this.episode = new MovieEpisodeDto(entity.getEpisode(),true);
         }
     }
 }

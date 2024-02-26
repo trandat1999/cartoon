@@ -10,3 +10,10 @@ export interface ForgotPasswordRequest {
   username?: string;
   email?: string;
 }
+export interface RegisterRequest {
+  username?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  fullName?: string;
+}

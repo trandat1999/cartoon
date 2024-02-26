@@ -18,7 +18,7 @@ const routes: Routes = [
       { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) },
       { path: 'setting',
         data: {
-          breadcrumb: ''
+          breadcrumb: 'breadcrumb.none',
         },
         loadChildren: () => import('./pages/setting/setting.module').then(m => m.SettingModule)
       },
