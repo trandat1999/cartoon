@@ -9,7 +9,6 @@ const routes: Routes = [
   {
     path: "category", component: CategoryComponent, data: {
       breadcrumb: 'breadcrumb.category',
-      breadcrumbI18n: 'breadcrumb.category',
     },
   },
   {

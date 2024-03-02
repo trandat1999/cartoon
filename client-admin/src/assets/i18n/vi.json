@@ -1,6 +1,9 @@
 {
   "common": {
-    "action": "Thao tác",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "back": "Back",
+    "action": "Action",
     "edit": "Edit",
     "delete": "Delete",
     "done": "Done",
@@ -24,7 +27,30 @@
     "404Message": "This is not the web page you are looking for.",
     "updateSuccess": "Update successfully",
     "createdSuccess": "Created successfully",
-    "inputSearch": "Please enter text for search"
+    "inputSearch": "Please enter text for search",
+    "noResultRecord": "No records",
+    "fieldRequired": "Field is required",
+    "fieldInvalid": "Field is invalid",
+    "choiceFile" : "Choose file",
+    "addFile": "Add file",
+    "name": "Name",
+    "code": "Code",
+    "description": "Description",
+    "province" : "Province",
+    "district": "District",
+    "commune": "Commune",
+    "address": "Address",
+    "phoneNumber": "Phone Number",
+    "uploadExcel": "Upload Excel",
+    "fileNotSelect": "File not selected",
+    "clearAll": "Clear All",
+    "quantity": "Quantity",
+    "total": "Total",
+    "add": "Add",
+    "voidedFalse": "Active",
+    "voidedTrue": "Voided",
+    "status": "Status",
+    "uploadFile": "Upload File"
   },
   "loginComponent": {
     "username": "username",
@@ -42,11 +68,11 @@
     "nameRequired": "Name is required"
   },
   "paginator": {
-    "itemsPerPageLabel": "Số bản ghi trên 1 trang",
-    "nextPageLabel": "Trang tiếp theo",
-    "previousPageLabel": "Trang trước",
-    "lastPageLabel": "Trang cuối",
-    "firstPageLabel": "Trang đầu"
+    "itemsPerPageLabel": "items per page",
+    "nextPageLabel": "Next page",
+    "previousPageLabel": "Previous page",
+    "lastPageLabel": "Last page",
+    "firstPageLabel": "first page"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -56,7 +82,9 @@
     "manage": "Manage",
     "users": "Users",
     "roles": "Role",
-    "administrativeUnit": "Administrative Unit"
+    "country": "Country",
+    "movie": "Movie",
+    "movieEpisode": "Movie Episode"
   },
   "user": {
     "profile": "Profile",
@@ -80,8 +108,8 @@
     "birthDate": "Birth Date",
     "phoneNumber": "Phone Number",
     "email": "Email",
-    "idNumber": "Giấy tờ tùy thân",
-    "idNumberIssueDate": "Ngày tạo"
+    "idNumber": "Id Number",
+    "idNumberIssueDate": "Id Issue Date"
   },
   "gender": {
     "male": "Male",
@@ -89,7 +117,7 @@
     "unknown": "Unknown"
   },
   "validation": {
-    "required": "Trường bắt buộc",
+    "required": "Field is required",
     "invalid": "Field is invalid",
     "password_not_match": "Confirm password must be match password",
     "email" : "Email must be a valid email address"
@@ -102,14 +130,53 @@
   "role": {
     "name": "Roles"
   },
-  "manage" : {
-    "manage" : "Manage",
-    "users" : "Users",
-    "administrativeUnit" : "Administrative Unit"
+  "auth": {
+    "backToLogin": "Back to login",
+    "generateToken": "Generate token",
+    "backToRegister": "Back to register",
+    "confirmUsername": "Confirm username",
+    "fillUsernameAndEmail": "Please fill in your username and email to reset a new password",
+    "forgotPassword": "Forgot password",
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "fullName": "Full name",
+    "login": "Login",
+    "ifExistAccount" : "If already account",
+    "confirmPassword": "Confirm password",
+    "register" : "Register"
   },
-  "administrativeUnit": {
-    "name": "Tên",
-    "code": "Code",
-    "description" : "Description"
+  "settingModule": {
+    "category": "Category",
+    "country": "Country",
+    "movie": "Movie",
+    "movieEpisode": "Movie episode"
+  },
+  "movie":{
+    "publishYear": "Publish Year",
+    "category": "Category",
+    "otherName": "Other name",
+    "image": "Image",
+    "episode": "Episode",
+    "part": "Part",
+    "link": "Link",
+    "orderNumber": "Number Order",
+    "embeddedLink": "Embedded Link",
+    "file": "File",
+    "previousEpisode": "Episode previous"
+  },
+  "layout": {
+    "english": "English",
+    "vietnamese": "Vietnamese",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "breadcrumb": {
+    "none": "",
+    "home": "Trang chủ",
+    "category": "Thể loại",
+    "country": "Quốc gia",
+    "movieEpisode": "Tập phim",
+    "movie": "Phim"
   }
 }

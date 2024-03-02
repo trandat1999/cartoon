@@ -68,7 +68,12 @@
       </div>
     </nz-header>
     <nz-content>
-      <thd-breadcrumb [routeLabelFn]="translateFn"  [autoGenerate]="true"></thd-breadcrumb>
+      <ng-container *ngIf="isVisible$ | async">
+        <thd-breadcrumb [lang]="currentLanguage" [routeLabelFn]="translateFn"  [autoGenerate]="true"></thd-breadcrumb>
+      </ng-container>
+      <ng-container *ngIf="!(isVisible$ | async)">
+        <thd-breadcrumb [lang]="currentLanguage" [routeLabelFn]="translateFn"  [autoGenerate]="true"></thd-breadcrumb>
+      </ng-container>
       <div class="inner-content mt-2">
         <router-outlet></router-outlet>
       </div>

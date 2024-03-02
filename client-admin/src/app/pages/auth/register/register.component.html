@@ -5,16 +5,16 @@
     </div>
     <div nz-form nzLayout="horizontal" [formGroup]="formGroup" class="card-body row">
       <div class="">
-        <thd-input [labelSpan]="8" [inputSpan]="16" label="{{'auth.fullName' | translate}}"
+        <thd-input [labelSpan]="6" [inputSpan]="18" label="{{'auth.fullName' | translate}}"
                    formControlName="fullName" [errorText]="getErrorMessage('fullName')"></thd-input>
-        <thd-input [labelSpan]="8" [inputSpan]="16" label="{{'auth.email' | translate}}"
+        <thd-input [labelSpan]="6" [inputSpan]="18" label="{{'auth.email' | translate}}"
                    formControlName="email" [errorText]="getErrorMessage('email')"></thd-input>
-        <thd-input [labelSpan]="8" [inputSpan]="16" label="{{'auth.username' | translate}}"
+        <thd-input [labelSpan]="6" [inputSpan]="18" label="{{'auth.username' | translate}}"
                    formControlName="username" [errorText]="getErrorMessage('username')"></thd-input>
-        <thd-input [labelSpan]="8" [inputSpan]="16" label="{{'auth.password' | translate}}"
+        <thd-input [labelSpan]="6" [inputSpan]="18" label="{{'auth.password' | translate}}"
                    formControlName="password" [type]="passwordVisible?'text':'password'" [suffix]="suffixTemplate"
                    [errorText]="getErrorMessage('password')"></thd-input>
-        <thd-input [labelSpan]="8" [inputSpan]="16" label="{{'auth.confirmPassword' | translate}}" [suffix]="suffixTemplate"
+        <thd-input [labelSpan]="6" [inputSpan]="18" label="{{'auth.confirmPassword' | translate}}" [suffix]="suffixTemplate"
                    formControlName="confirmPassword" [type]="passwordVisible?'text':'password'"
                    [errorText]="getErrorMessage('confirmPassword')">
         </thd-input>

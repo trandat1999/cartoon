@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {StorageService} from "../../services/storage.service";
 import {TranslateService} from "@ngx-translate/core";
 import {TranslateConfigService} from "../../services/translate.service";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'thd-layout',
@@ -13,31 +14,44 @@ import {TranslateConfigService} from "../../services/translate.service";
 export class LayoutComponent implements OnInit {
   isCollapsed = false;
   currentLanguage = "en";
-  constructor(private authService:AuthService,
-              private translateService:TranslateConfigService,
-              private router:Router,
+
+  constructor(private authService: AuthService,
+              private translateService: TranslateConfigService,
+              private router: Router,
               private translate: TranslateService,
-              private storage : StorageService) {
-    this.currentLanguage = this.translateService.getLanguage();
+              private storage: StorageService) {
+    this.currentLanguage = this.storage.getLanguage();
   }
 
   ngOnInit(): void {
 
   }
+
   logout(): void {
     this.authService.logout().subscribe(data => {
     });
     this.storage.signOut();
     this.router.navigate(['/login'])
   }
-  changeLanguage(lang: string){
+
+  changeLanguage(lang: string) {
+    this.destroyAndReload();
     this.translateService.changeLanguage(lang);
   }
-  translateFn = (key:string) => {
-    if(key){
-      return this.translate.instant(""+ key);
-    }else{
+
+  translateFn = (key: string) => {
+    if (key) {
+      return this.translate.instant(key)
+    } else {
       return "";
     }
+  }
+  isVisible$ = new BehaviorSubject(true);
+
+  destroyAndReload() {
+    this.isVisible$.next(false);
+    setTimeout(() => {
+      this.isVisible$.next(true);
+    }, 1);
   }
 }

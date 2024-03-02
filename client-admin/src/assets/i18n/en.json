@@ -130,11 +130,6 @@
   "role": {
     "name": "Roles"
   },
-  "breadcrumbs": {
-    "home": "Home",
-    "profile": "Profile",
-    "setting": "Setting"
-  },
   "auth": {
     "backToLogin": "Back to login",
     "generateToken": "Generate token",
@@ -178,6 +173,7 @@
   },
   "breadcrumb": {
     "none": "",
+    "home": "Home",
     "category": "Category",
     "country": "Country",
     "movieEpisode": "Movie Episode",

@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {PreloaderService} from "./services/preloader.service";
+import {TranslateService} from "@ngx-translate/core";
+import {StorageService} from "./services/storage.service";
 
 @Component({
   selector: 'app-root',
@@ -12,8 +14,11 @@ export class AppComponent implements OnInit,AfterViewInit{
   }
   constructor(
     private preloader: PreloaderService,
+    private translate: TranslateService,
+    private storeService: StorageService
   ) {
   }
   ngOnInit(): void {
+    this.translate.use(this.storeService.getLanguage())
   }
 }
